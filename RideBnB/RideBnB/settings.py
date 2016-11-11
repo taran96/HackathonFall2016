@@ -50,12 +50,18 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+AUTHENTICATION_BACKENDS = (
+    'social.backends.lyft.LyftOAuth2'
+    'django.contrib.auth.backends.ModelBackend'
+
+)
+
 ROOT_URLCONF = 'RideBnB.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -119,3 +125,19 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+
+SOCIAL_AUTH_LYFT_KEY = os.getenv('LYFT_KEY') # Client ID
+SOCIAL_AUTH_LYFT_SECRET = os.getenv('LYFT_SECRET') # Client Secret
+
+GOOGLE_MAPS_JAVASCRIPT_KEY = os.getenv('GOOGLE_MAPS_JAVASCRIPT_KEY')
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# Static asset configuration
+STATIC_ROOT = 'staticfiles'
+# STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static")  #static root likely won't be in the project folder
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
