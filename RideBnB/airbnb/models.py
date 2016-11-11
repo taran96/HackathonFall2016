@@ -10,10 +10,13 @@ class Room(models.Model):
     ac = models.BooleanField(default=False)
     kitchen = models.BooleanField(default=False)
     heating = models.BooleanField(default=False)
-    p_type = models.CharField(max_length=1, choices=(("T", "Townhouse"), ("C", "Condominium"),( "A", "Apartment"), ("H", "House")))
-    price = models.FloatField()
-    desc = models.TextField()
+    p_type = models.CharField(max_length=1, choices=(("T", "Townhouse"), ("C", "Condominium"),( "A", "Apartment"), ("H", "House")),null=True)
+    price = models.FloatField(null=True)
+    desc = models.TextField(null=True)
     air_id = models.IntegerField()
-    title = models.TextField()
-    location = models.TextField()
-    pic_url = models.TextField()
+    title = models.TextField(null=True)
+    location = models.TextField(null=True)
+    pic_url = models.TextField(null=True)
+
+    def __str__(self):
+        return self.title
