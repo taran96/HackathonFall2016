@@ -20,6 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+# TODO: generate new key and get it from environment vars
 SECRET_KEY = 't(y7se(&=kzi4&$)mpj(g4o2j_fszwmj@0(mk+&za3ehu#qh%e'
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -38,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'airbnb',
+    'users',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -51,9 +53,7 @@ MIDDLEWARE_CLASSES = [
 ]
 
 AUTHENTICATION_BACKENDS = (
-    'social.backends.lyft.LyftOAuth2'
-    'django.contrib.auth.backends.ModelBackend'
-
+    'django.contrib.auth.backends.ModelBackend',
 )
 
 ROOT_URLCONF = 'RideBnB.urls'
@@ -124,7 +124,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
-STATIC_URL = '/static/'
 
 SOCIAL_AUTH_LYFT_KEY = os.getenv('LYFT_KEY') # Client ID
 SOCIAL_AUTH_LYFT_SECRET = os.getenv('LYFT_SECRET') # Client Secret
@@ -135,7 +134,7 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Static asset configuration
 STATIC_ROOT = 'staticfiles'
-# STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static")  #static root likely won't be in the project folder
+#STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static")  #static root likely won't be in the project folder
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
