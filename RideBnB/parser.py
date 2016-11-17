@@ -1,13 +1,14 @@
 import os
+import sys
 import glob
 import django
 import csv
-#from csvmapper import FieldMapper, CSVParser
-
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "RideBnB.settings")
 django.setup()
+
 from airbnb.models import Room
+
 csvFiles = glob.glob("csvs/*.csv")
 
 def get_amenities(lst):
@@ -15,7 +16,6 @@ def get_amenities(lst):
 
     for i in lst:
         new_list = []
-        print(i)
         new_list.append("TV" in i)
         new_list.append('Internet' in i)
         new_list.append("Air Conditioning" in i)
@@ -30,7 +30,6 @@ for i in csvFiles:
     headers = next(reader, None)
     for j in headers:
         columns[j] = []
-    #print(list(reader)[0])
     for row in reader:
 
         for h, v in zip(headers,row):
@@ -66,43 +65,7 @@ for i in csvFiles:
     for i in range(len(needed_data['lon'])):
         kwargs = {}
         for key, val in new_needs.items():
-            print(key)
             kwargs[key] = new_needs[key][i]
 
         r = Room(**kwargs)
         r.save()
-
-'''
-for i in csvFiles:
-    parser = csvmapper.CSVParser(i, hasHeader=True)
-    rows.append(parser.buildObject())
-
-("my name is %s %s" % (name, lname))
-
-def get_amenities(lst):
-    new_list = []
-    new_list.append("TV" in lst)
-    new_list.append('Internet' in lst)
-    new_list.append("Air Conditioning" in lst)
-    new_list.append("Kitchen" in lst)
-    new_list.append("Heating" in lst)
-    return new_list
-
-for j in rows:
-    for k in j:
-        a = get_amenities(list(k.amenities))
-        Room(
-            lon=float(k.longitude),
-            lat=float(k.latitude),
-            tv=a[0],
-            wifi=a[1],
-            ac=a[2],
-            kitchen=a[3],
-            heating=a[4],
-            p_type=k.property_type,
-            air_id=int(k.id),
-            price=float(k.price),
-            desc=k.summary,
-            title=k.name,
-            pic_url=k.picture_url)
-'''
