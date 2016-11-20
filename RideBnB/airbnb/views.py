@@ -1,5 +1,4 @@
 from django.core import serializers
-from django.forms.models import model_to_dict
 from django.http import HttpResponse
 
 from airbnb.models import Room
@@ -7,6 +6,9 @@ from ride.views import lyft_json
 
 
 def give_airbnb(request):
+    '''
+        Docstring
+    '''
     if request.method == 'POST':
         lon = float(request.POST.get("lon"))
         lat = float(request.POST.get("lat"))
@@ -24,6 +26,9 @@ def give_airbnb(request):
 
 
 def give_dest_info(request):
+    '''
+        [DOCSTRING]
+    '''
     lon = float(request.POST.get("lon"))
     lat = float(request.POST.get("lat"))
     if not (lon and lat):

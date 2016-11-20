@@ -16,8 +16,11 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from airbnb.views import give_airbnb
+from home.views import homepage
 
 urlpatterns = [
+    url(r'^', homepage),
     url(r'^admin/', admin.site.urls),
     url(r'^api/airbnb/', give_airbnb, name="airbnb_api_request"),
+
 ]
