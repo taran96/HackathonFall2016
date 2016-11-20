@@ -19,8 +19,9 @@ from airbnb.views import give_airbnb
 from home.views import homepage
 
 urlpatterns = [
-    url(r'^', homepage),
+
     url(r'^admin/', admin.site.urls),
     url(r'^api/airbnb/', give_airbnb, name="airbnb_api_request"),
+    url(r'^$', homepage),
 
 ]
