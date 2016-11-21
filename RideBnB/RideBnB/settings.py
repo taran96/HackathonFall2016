@@ -20,13 +20,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# TODO: generate new key and get it from environment vars
-SECRET_KEY = 't(y7se(&=kzi4&$)mpj(g4o2j_fszwmj@0(mk+&za3ehu#qh%e'
+SECRET_KEY = os.getenv(
+    "SECRET",
+    't(y7se(&=kzi4&$)mpj(g4o2j_fszwmj@0(mk+&za3ehu#qh%e') # old key
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = not os.getenv("DEBUG", False)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [".ridebnb.herokuapp.com"]
 
 
 # Application definition
@@ -82,8 +83,11 @@ WSGI_APPLICATION = 'RideBnB.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.getenv("DB_NAME"),
+        'USER': os.getenv("DB_USER"),
+        'PASSWORD': os.getenv("DB_PASSWORD"),
+        'HOST': os.getenv("DB_HOST"),
     }
 }
 

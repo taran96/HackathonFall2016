@@ -4,3 +4,14 @@ Django==1.9
 gunicorn==19.6.0
 static3==0.7.0
 uberapi==1.0.0
+coverage==4.2
+dj-static==0.0.6
+Django==1.9
+django-tastypie==0.13.3
+gunicorn==19.6.0
+psycopg2==2.6.2
+python-dateutil==2.6.0
+python-mimeparse==1.6.0
+six==1.10.0
+static3==0.7.0
+uberapi==1.0.0
